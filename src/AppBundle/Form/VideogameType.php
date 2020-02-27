@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,11 +27,11 @@ class VideogameType extends AbstractType {
                     'label' => 'Web URL: ',
                     'attr' => ['class' => 'form-control '],
                 ])
-                ->add('logo', TextType::class, [
+                ->add('logo', UrlType::class, [
                     'label' => 'Logo URL: ',
                     'attr' => ['class' => 'form-control '],
                 ])
-                ->add('description', TextType::class, [
+                ->add('description', TextareaType::class, [
                     'label' => 'Description: ',
                     'attr' => ['class' => 'form-control '],
                 ])
