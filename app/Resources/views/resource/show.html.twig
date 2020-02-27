@@ -1,0 +1,29 @@
+
+{% block body %}
+    <div class="col-md-6">
+    {% if resource.type == "image" %}
+            <div class="card text-white">
+                <img class="img-fluid" src="{{ resource.url }}" alt="resource">
+                <div class="card-img-overlay">
+                    {% if is_granted('ROLE_USER_DEVELOPER') %}
+                        {% if app.user.username == resource.getVideogame().getDeveloper().getUsername() %}
+                            <a href="{{ path('resource_edit', {'id': resource.getId()}) }}" class="btn btn-outline-primary">Edit Resource</a>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+    {% elseif resource.type == "video" %}
+            <div class="card text-white">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ resource.url }}"></iframe>
+                </div>
+                {% if is_granted('ROLE_USER_DEVELOPER') %}
+                    {% if app.user.username == resource.getVideogame().getDeveloper().getUsername() %}
+                        <a href="{{ path('resource_edit', {'id': resource.getId()}) }}" class="btn btn-outline-primary">Edit Resource</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+    {% endif %}
+    </div>
+{% endblock %}

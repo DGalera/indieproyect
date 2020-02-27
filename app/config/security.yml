@@ -1,0 +1,42 @@
+security:
+    # En el caso que los usuarios tengan la contraseña cifrada configuramos los encoders para la entidad en la que estén los usuarios
+    encoders:
+        AppBundle\Entity\UserMgr\User:
+            algorithm: bcrypt
+            cost: 4
+    role_hierarchy:
+        ROLE_USER: [ROLE_USER_DEVELOPER, ROLE_USER_REVIEWER]
+        ROLE_ADMIN: [ROLE_BOSS]
+
+    # En providers le indicamos que los usuarios van a salir de la base de datos y el username será email
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        our_db_provider:
+            entity:
+                class: AppBundle:UserMgr\User
+                property: email
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            logout: ~
+
+            guard:
+                authenticators:
+                - AppBundle\Security\LoginFormAuthenticator
+
+    access_control:
+    - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/category/new, role: [ROLE_BOSS] }
+    - { path: ^/category/(.+)/edit, role: [ROLE_BOSS] }
+    - { path: ^/videogame/new, role: [ROLE_USER_DEVELOPER] }
+    - { path: ^/videogame/(.+)/edit, role: [ROLE_USER_DEVELOPER] }
+    - { path: ^/resource, role: [ROLE_USER_DEVELOPER] }
+    - { path: ^/review/(.+), role: [ROLE_USER_REVIEWER] }
+    - { path: ^/admin, role: [ROLE_BOSS] }
+    

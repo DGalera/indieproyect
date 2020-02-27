@@ -1,0 +1,50 @@
+/*_objects: Patrones de layout estructurales repetitivos, sin ningún aspecto visual, por ejemplo, el media object.*/
+
+#job {
+  h5 {
+    font-size: 110%;
+    font-style: italic;
+    float: right;
+    color: #fff;
+  }
+  h6 {
+    font-size: 150%;
+    font-weight: bold;
+  }
+  .lead {
+    font-size: 70%;
+    color: #5d6162;
+  }
+  .text-muted {
+    font-size: 110%;
+    font-weight: bold;
+    color: #176f94;
+  }
+  .description, p.how_to_apply {
+    font-size: 105%;
+    line-height: 1.4em;
+    margin: 0 10px;
+    color: #333;
+  }
+  .logo {
+    float: right;
+    background: #fff;
+  }
+}
+
+
+
+#job_actions {
+  padding-left: 0;
+  background-color: #ffc;
+  list-style: none;
+  ul {
+    display: inline;
+  }
+  h3 {
+    display: inline;
+    font-weight: bold;
+    background-color: #eee;
+  }
+}
+

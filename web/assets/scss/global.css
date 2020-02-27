@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/*_settings: Contiene las variables globales, configuraci├│n, colores, etc. com├║n para todo el proyecto.*/
+/*_elements: Estilos a etiquetas de HTML.*/
+body {
+  font: "Lucida Grande", Lucida, Verdana, sans-serif;
+  background-color: #828f95; }
+
+/*_objects: Patrones de layout estructurales repetitivos, sin ning├║n aspecto visual, por ejemplo, el media object.*/
+#job h5 {
+  font-size: 110%;
+  font-style: italic;
+  float: right;
+  color: #fff; }
+#job h6 {
+  font-size: 150%;
+  font-weight: bold; }
+#job .lead {
+  font-size: 70%;
+  color: #5d6162; }
+#job .text-muted {
+  font-size: 110%;
+  font-weight: bold;
+  color: #176f94; }
+#job .description, #job p.how_to_apply {
+  font-size: 105%;
+  line-height: 1.4em;
+  margin: 0 10px;
+  color: #333; }
+#job .logo {
+  float: right;
+  background: #fff; }
+
+#job_actions {
+  padding-left: 0;
+  background-color: #ffc;
+  list-style: none; }
+  #job_actions ul {
+    display: inline; }
+  #job_actions h3 {
+    display: inline;
+    font-weight: bold;
+    background-color: #eee; }
+
+/*_themes: Estilos para cambiar el aspecto de componentes y elementos en base a la clase del theme.*/
+body {
+  font: "Lucida Grande", Lucida, Verdana, sans-serif;
+  background-color: #828f95; }
+
+#header a.navbar-brand {
+  font-family: "Bungee";
+  color: white; }
+
+#sub_header {
+  color: white;
+  width: 100%;
+  background: #3498DB;
+  margin: 0 auto; }
+
+#content h1 {
+  margin-top: 2vh;
+  padding: 0px 2vh;
+  font-size: 124%;
+  text-transform: uppercase;
+  color: white; }
+
+#footer {
+  font-size: 90%;
+  background-color: #1F3450;
+  color: white; }
+
+/*# sourceMappingURL=global.css.map */

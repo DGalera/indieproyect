@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white " >
+    <a class="navbar-brand d-flex flex-column" href="{{ path('homepage') }}">
+        <img src="{{ asset('assets/img/dev_logo.png') }}" class="img-fluid rounded" style="width:100px" alt="logoIndieproyect">
+        <span class="badge"> {{ app.user.username }}</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('category_index') }}" ><span class="fa fa-list p-2"></span>Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('videogame_index')}}" ><span class="fa fa-gamepad p-2"></span>Videogames</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav d-flex justify-content-end">
+            {% if is_granted('ROLE_USER_DEVELOPER') %}
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('videogame_new') }}" ><span class="fa fa-gamepad p-2"></span>Publish New Videogame</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('developer_show', {'username': app.user.username }) }}" ><span class="fa fa-user p-2"></span>My Profile</a>
+                </li>
+            {% elseif is_granted('ROLE_USER_REVIEWER') %}
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('reviewer_show', {'username': app.user.username }) }}" ><span class="fa fa-user p-2"></span>My Profile</a>
+                </li>
+
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link "  href="{{ path('security_logout') }}" ><span class="fa fa-sign-out  p-2"></span> Logout</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<hr/>

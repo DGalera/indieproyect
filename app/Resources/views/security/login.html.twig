@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include 'navbar/empty.html.twig' %}
+{% endblock %}
+    {% block body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-8 mx-auto">
+
+                    <div class="card">
+                        <div class="card-header">
+                            Accede
+                        </div>
+                        <div class="card-body">
+
+                            {{ form_start(form, { 'class': 'form-inline' }) }}
+                            {% if error %}
+                                <div class="alert alert-danger">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+                            <div class="border border-white  row">
+                                <label for="vTitle" class="col-4 col-form-label">{{ form_label(form._username) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(form._username) }}
+                                </div>
+                            </div>
+                            <div class="border border-white  row">
+                                <label for="vTitle" class="col-4 col-form-label">{{ form_label(form._password) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(form._password) }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button>
+                            &nbsp;
+                            <a  href="{{ path('user_register') }}">Register</a>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+

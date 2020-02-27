@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <h1> {{ category.name }} Videogames</h1>
+        </div>
+        <div class="row justify-content-md-center">
+            <h2><small><i>{{ category.description }}</i></small></h2>
+        </div>
+        <div class="row justify-content-end">
+            <a href="{{ path('category_index') }}" class="btn btn-outline-primary">Back to all categories</a>
+            {% if is_granted('ROLE_BOSS') %}
+                <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-outline-primary">Edit Category</a>
+
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+                {{ form_end(delete_form) }}
+            {% endif %}
+        </div>
+        <br>
+
+        {% for videogame in category.videogames %}
+
+            {{ include('videogame/list.html.twig', { 'videogame': videogame }) }}
+        {% endfor %}
+
+
+
+    </div>
+
+{% endblock %}

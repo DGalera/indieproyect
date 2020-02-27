@@ -1,0 +1,43 @@
+{% block body %}
+    <div class="row">
+        <h3>Leave your Review</h3>
+    </div>
+    <div class="row">
+
+        <div class="col-12 mx-auto">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text">
+                        {{ form_start(form) }}
+                        <div class="border border-white row">
+                            <label for="analysis"
+                                   class="col-4 col-form-label">{{ form_label(form.analysis) }}</label>
+                            <div class="col-8">
+                                {{ form_widget(form.analysis) }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="border border-white  row">
+                            <label for="punctuation"
+                                   class="col-4 col-form-label">{{ form_label(form.punctuation) }}</label>
+                            <div class="col-8">
+                                {{ form_widget(form.punctuation) }}
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-end">
+                            {{ form_widget(form.save) }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

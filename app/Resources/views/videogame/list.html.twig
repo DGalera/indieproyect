@@ -1,0 +1,25 @@
+{% block body %}
+    <div class="card mb-12">
+        <div class="row no-gutters">
+            <div class="col-md-3 my-auto">
+                <img class="card-img " src="{{ videogame.getLogo() }}" alt="logo">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">{{ videogame.getTitle() }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ videogame.getCategory().getName() }}</h6>
+                    </div>
+                    <p class="card-text">{{ videogame.getDescription()}}</p>
+                    <p class="card-text"><small class="text-muted">By: {{ videogame.getDeveloper().getUsername() }}</small></p>
+                    <a href="{{ path('videogame_show', {'id': videogame.getId()}) }}" class="btn btn-outline-primary">More details...</a>
+                    {% if is_granted('ROLE_USER_DEVELOPER') %}
+                        {% if app.user.username == videogame.getDeveloper().getUsername() %}
+                            <a href="{{ path('videogame_edit', {'id': videogame.getId()}) }}" class="btn btn-outline-primary">Edit Videogame</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

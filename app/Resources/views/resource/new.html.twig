@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-8 mx-auto">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Resource Creation</h3>
+                        <div class="card-text">
+                            {{ form_start(form) }}
+                            <div class="border border-white row">
+                                <label for="url"
+                                       class="col-4 col-form-label">{{ form_label(form.url) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(form.url) }}
+                                </div>
+                            </div>
+                            <div class="border border-white  row">
+                                <label for="type"
+                                       class="col-4 col-form-label">{{ form_label(form.type) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(form.type) }}
+                                </div>
+                            </div>
+
+                            <div class="border border-white  row">
+                                <div class="col-sm-4 textarea">
+                                    {{ form_widget(form.save) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

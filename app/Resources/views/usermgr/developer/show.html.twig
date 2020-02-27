@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-4">
+                <h4 class="display-4">{{ developer.getName() }}<small> {{ developer.getSurnames() }} </small></h4>
+                <h6>{{ developer.getCompany() }}</h6>
+                <h6>{{ developer.getEmail() }}</h6>
+                {% if is_granted('ROLE_USER_DEVELOPER') %}
+                    {% if developer.username == app.user.username %}
+                        <a class="btn btn-outline-secondary" href="{{ path('developer_edit', { 'username': developer.username }) }}"><span class="fa fa-pencil"></span> edit</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="col-8" >
+                <h3>My Videogames</h3>
+
+                {% for videogame in developer.videogames %}
+                    {{ include('videogame/list.html.twig', { 'videogame': videogame }) }}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

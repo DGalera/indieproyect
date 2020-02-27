@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-4">
+                <h4 class="display-4">{{ reviewer.getName() }}<small> {{ reviewer.getSurnames() }} </small></h4>
+                <h6>{{ reviewer.getWeb() }}</h6>
+                <h6>{{ reviewer.getEmail() }}</h6>
+                {% if is_granted('ROLE_USER_REVIEWER') %}
+                    {% if reviewer.username == app.user.username %}
+                        <a class="btn btn-outline-secondary" href="{{ path('reviewer_edit', { 'username': reviewer.username }) }}"><span class="fa fa-pencil"></span> edit</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="col-8" >
+                <h3>My Reviews</h3>
+
+                {% for review in reviewer.reviews %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5 class="card-title">{{ review.getVideogame().getTitle() }}</h5>
+                                    <p class="card-subtitle mb-2 text-muted">From: <a href="{{ review.getReviewer().getWeb() }}">{{ review.getReviewer().getWeb() }}</a></p>
+                                    <p class="card-subtitle mb-2 text-muted">{{ review.getReviewer().getNumReviews() }} Reviews</p>
+                                </div>
+                                <div class="col-md-4 my-auto">
+                                    <p class="card-text">{{ review.getAnalysis() }}</p>
+                                </div>
+                                <div class="col-md-4 my-auto text-center">
+                                    <h5 class="card-title"> Punctuation: {{ review.getPunctuation() }}</h5>
+                                    {% if is_granted('ROLE_USER_REVIEWER') %}
+                                        {% if app.user.username == review.getReviewer().getUsername() %}
+                                            <a href="{{ path('review_edit', {'id': review.getId()}) }}" class="btn btn-outline-primary">Edit</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

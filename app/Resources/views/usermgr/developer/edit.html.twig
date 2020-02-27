@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-8 mx-auto">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="card-text">
+
+                            {{ form_start(edit_form) }}
+
+                            <div class="border border-white row">
+                                <label for="vCIF" class="col-4 col-form-label">{{ form_label(edit_form.name) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(edit_form.name) }}
+                                </div>
+                            </div>
+                            <div class="border border-white row">
+                                <label for="vCIF" class="col-4 col-form-label">{{ form_label(edit_form.surnames) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(edit_form.surnames) }}
+                                </div>
+                            </div>
+                                <div class="border border-white row">
+                                <label for="vCIF" class="col-4 col-form-label">{{ form_label(edit_form.company) }}</label>
+                                <div class="col-8">
+                                    {{ form_widget(edit_form.company) }}
+                                </div>
+                            </div>
+
+
+                            <div class="border border-white  row">
+                                <div class="col-sm-4 textarea">
+                                    {{ form_widget(edit_form.save) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(edit_form) }}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

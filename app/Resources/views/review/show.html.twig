@@ -1,0 +1,26 @@
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="card-title"><a href="{{ path('reviewer_show', {'username': review.getReviewer().getUsername() }) }}">{{ review.getReviewer().getUsername() }}</a></h5>
+                    <p class="card-subtitle mb-2 text-muted">From: <a href="{{ review.getReviewer().getWeb() }}">{{ review.getReviewer().getWeb() }}</a></p>
+                    <p class="card-subtitle mb-2 text-muted">{{ review.getReviewer().getNumReviews() }} Reviews</p>
+                </div>
+                <div class="col-md-4 my-auto">
+                    <p class="card-text">{{ review.getAnalysis() }}</p>
+                </div>
+                <div class="col-md-4 my-auto text-center">
+                    <h5 class="card-title"> Punctuation: {{ review.getPunctuation() }}</h5>
+                    {% if is_granted('ROLE_USER_REVIEWER') %}
+                        {% if app.user.username == review.getReviewer().getUsername() %}
+                            <a href="{{ path('review_edit', {'id': review.getId()}) }}" class="btn btn-outline-primary">Edit</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock %}

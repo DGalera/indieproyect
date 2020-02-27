@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row d-flex justify-content-between">
+            <h1>{{ videogame.getTitle() }}</h1>
+            <div>
+                {% if is_granted('ROLE_USER_DEVELOPER') %}
+                    {% if app.user.username == videogame.getDeveloper().getUsername() %}
+                        <a href="{{ path('resource_new', {'videogameid': videogame.getId()}) }}" class="btn btn-outline-primary">Add Resource</a>
+                        <a href="{{ path('videogame_edit', {'id': videogame.getId()}) }}" class="btn btn-outline-primary">Edit</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="card mb-12">
+            <div class="row justify-content-center">
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Description:</h6>
+                        <p class="card-text">{{ videogame.getDescription()}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Category:</h6>
+                        <p class="card-text">{{ videogame.getCategory().getName() }}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Developer:</h6>
+                        <p class="card-text"><a href="{{ path('developer_show', {'username': videogame.getDeveloper().getUsername() }) }}">
+                            {{ videogame.getDeveloper().getUsername() }}</a>
+                        </p>
+                        
+                        <h6 class="card-subtitle mb-2 text-muted">WebPage:</h6>
+                        <a href="{{ videogame.getWebURL() }}"><p class="card-text">{{ videogame.getWebURL() }}</p></a>
+                    </div>
+                </div>
+                <div class="col-md-4 my-auto text-center">
+                    <img class="card-img" src="{{ videogame.getLogo() }}" alt="logo">
+                    <br>
+                    <h3 class="card-subtitle mb-2">PUNCTUATION: {{ videogame.punctuation }}</h3>
+                </div>
+            </div>
+        </div>
+
+
+        {% if videogame.resources|length >0 %}
+            <div class="row">
+                <h3>Resources</h3>
+            </div>
+            <div class="row justify-content-md-center">
+                {% for resource in videogame.resources %}
+                    {% if resource.type == "image" %}
+                        <div class="col-md-4">
+                            <div class="card text-white">
+                                <img class="img-fluid" src="{{ resource.url }}" alt="resource">
+                                <div class="card-img-overlay">
+                                    {% if is_granted('ROLE_USER_DEVELOPER') %}
+                                        {% if app.user.username == videogame.getDeveloper().getUsername() %}
+                                            <a href="{{ path('resource_edit', {'id': resource.getId()}) }}" class="btn btn-outline-primary">Edit Resource</a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <br><br>
+            <div class="row justify-content-md-center">
+                {% for resource in videogame.resources %}
+                    {% if resource.type == "video" %}
+                        <div class="col-md-6">
+                            <div class="card text-white">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="{{ resource.url }}"></iframe>
+                                </div>
+                                {% if is_granted('ROLE_USER_DEVELOPER') %}
+                                    {% if app.user.username == videogame.getDeveloper().getUsername() %}
+                                        <a href="{{ path('resource_edit', {'id': resource.getId()}) }}" class="btn btn-outline-primary">Edit Resource</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br><br>
+
+        {% if videogame.reviews|length >0 %}
+            <div class="row">
+                <h3>Reviews</h3>
+            </div>
+            {% for review in videogame.reviews %}
+                {{ include('review/show.html.twig', { 'review': review }) }}
+            {% endfor %}
+
+        {% endif %}
+        {% if is_granted('ROLE_USER_REVIEWER') %}
+            
+            {{ include('review/new.html.twig') }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

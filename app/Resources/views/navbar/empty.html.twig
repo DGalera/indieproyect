@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    
+    <div class="d-flex">
+        <div class="p-2">
+            <a class="navbar-brand" href="{{ path('homepage') }}">
+                <img src="{{ asset('assets/img/dev_logo.png') }}" class="img-fluid rounded"
+                     alt="logoIndieProyect" style="width:100px">
+            </a>
+        </div>
+    </div>
+                     <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('category_index') }}" ><span class="fa fa-list p-2"></span>Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('videogame_index')}}" ><span class="fa fa-gamepad p-2"></span>Videogames</a>
+            </li>
+        </ul>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<hr/>

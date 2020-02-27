@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="UTF-8" /> 
+        <title>{% block title %}Artean{% endblock %}</title> 
+        {% block stylesheets %} 
+            <link rel="stylesheet" href="{{asset('build/app.css')}}"> 
+        {% endblock %} 
+    </head> 
+    <body> 
+        {% block navbar %} 
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% include 'navbar/private.html.twig' %} 
+            {% else %} 
+                {% include 'navbar/public.html.twig' %} 
+            {% endif %} 
+        {% endblock %} 
+        {% block body %}{% endblock %} 
+        {% block javascripts %} 
+            <script src="{{asset('build/app.js')}}"> </script> 
+        {% endblock %} 
+    </body> 
+    <footer class="footer"> 
+        {% block footer %}{% endblock %} 
+    </footer> 
+</html>

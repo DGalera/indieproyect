@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12 mx-auto">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text">
+                    {{ form_start(edit_form) }}
+                    <div class="border border-white row">
+                        <label for="analysis"
+                               class="col-4 col-form-label">{{ form_label(edit_form.analysis) }}</label>
+                        <div class="col-8">
+                            {{ form_widget(edit_form.analysis) }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="border border-white  row">
+                        <label for="punctuation"
+                               class="col-4 col-form-label">{{ form_label(edit_form.punctuation) }}</label>
+                        <div class="col-8">
+                            {{ form_widget(edit_form.punctuation) }}
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-end">
+                        {{ form_widget(edit_form.save) }}
+                        {{ form_end(edit_form) }}
+                        <br>
+                        {{ form_start(delete_form, {'action': path('review_delete',{'id':review.id})}) }}
+                        <input type="submit" value="Delete" class="btn btn-danger">       
+                        {{ form_end(delete_form) }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
