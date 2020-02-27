@@ -1,22 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container text-center">
+                <h1 class="display-4">IndieProyect</h1>
+                <p class="lead">En los últimos años el mercado de videojuegos ha aumentado exponencialmente, haciendo que muchos desarrolladores decidan dedicarse al desarrollo de videojuegos independiente.
+                    Tener éxito en este mundo es complicado puesto que hay mucha competencia, las empresas grandes no dejan casi visibilidad a los desarrolladores independientes.
+                    Si eres desarrollador independiente, conseguir que tu videojuego tenga fama y popularidad va a ser una tarea extremadamente difícil, por eso necesitas encontrar una plataforma que te permita publicitar tu videojuego.
+                    No te comas más la cabeza. Indieproyect es tu lugar. Aquí tienes la oportunidad de publicitar tu videojuego y que otras personas hagan reseñas sobre él.</p>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-10 mx-auto">
-                <h1>IndieProyect</h1>
+                <a href="{{ path('security_login') }}" class="btn btn-secondary">Login</a>
+                <a href="{{ path('user_register') }}" class="btn btn-primary">Register</a>
+
             </div>
         </div>
-        <div class="row bg-white">
-            <p>
-                En los últimos años el mercado de videojuegos ha aumentado exponencialmente, haciendo que muchos desarrolladores decidan dedicarse al desarrollo de videojuegos independiente.
-                Tener éxito en este mundo es complicado puesto que hay mucha competencia, las empresas grandes no dejan casi visibilidad a los desarrolladores independientes.
-                Si eres desarrollador independiente, conseguir que tu videojuego tenga fama y popularidad va a ser una tarea extremadamente difícil, por eso necesitas encontrar una plataforma que te permita publicitar tu videojuego.
-                ¿Qué tengo que hacer para que mi videojuego sea popular?
-                ¿Cómo consigo que críticos y analistas jueguen a mi videojuego y realicen reviews que le den una mayor popularidad?
-                No te comas más la cabeza. Indieproyect es tu lugar. Aquí tienes la oportunidad de publicitar tu videojuego y que otras personas hagan reseñas sobre él.</p>
+    {% endif %}
+    <div class="container text-center">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row d-flex justify-content-between mx-auto">
+                <h1>Videogame Categories</h1><br>
+                <div>
+                    <a href="{{ path('category_new') }}" class="btn btn-outline-primary">Add Category</a>
+                </div>
+            </div>
+        {% else %}
+            <h1>Videogame Categories</h1><br>
+        {% endif %}
+        <div class="row d-flex justify-content-center">
+            {% for category in categories %}
+                <div class="col-md-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ category.getName() }}</h5>
+                            <p class="card-text" style="height: 5rem">{{ category.getDescription()}}</p>
+                            <a href="{{ path('category_show', {'id': category.getId()}) }}" class="btn btn-outline-primary">Show {{ category.getName() }} videogames</a>
+                            {% if is_granted('ROLE_BOSS') %}
+                                <a href="{{ path('category_edit', {'id': category.getId()}) }}" class="btn btn-outline-primary">Edit Category</a>
+                            {% endif %}
+                        </div>
+                    </div>
 
+                </div>
+            {% endfor %}
 
         </div>
     </div>

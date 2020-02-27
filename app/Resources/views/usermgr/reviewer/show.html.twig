@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h5 class="card-title">{{ review.getVideogame().getTitle() }}</h5>
+                                    <h5 class="card-title"><a href="{{ path('videogame_show', { 'id': review.getVideogame().getId() }) }}">{{ review.getVideogame().getTitle() }}</h5>
                                     <p class="card-subtitle mb-2 text-muted">From: <a href="{{ review.getReviewer().getWeb() }}">{{ review.getReviewer().getWeb() }}</a></p>
                                     <p class="card-subtitle mb-2 text-muted">{{ review.getReviewer().getNumReviews() }} Reviews</p>
                                 </div>
